@@ -1,0 +1,90 @@
+.timer-box {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  background: linear-gradient(180deg, rgba(29, 77, 108, 0.75), rgba(15, 23, 42, 0.9));
+  flex: 1;
+  justify-content: space-between;
+  min-height: 260px;
+  width: 100%;
+}
+
+.timer-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.timer-icon {
+  font-size: 1.5rem;
+}
+
+.timer-display {
+  background: rgba(15, 23, 42, 0.48);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 14px;
+  padding: 14px 16px;
+  text-align: center;
+  font-weight: 800;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  letter-spacing: 0.08em;
+  color: #f8fafc;
+}
+
+.timer-actions {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.icon-button {
+  width: 100%;
+  min-height: 48px;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+}
+
+.icon-button:hover {
+  transform: translateY(-1px);
+}
+
+.pause-button {
+  background: linear-gradient(135deg, #f59e0b, #ea580c);
+  box-shadow: 0 10px 22px rgba(245, 158, 11, 0.22);
+}
+
+.danger-button {
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+}
+
+.newgame-button {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+
+.hint-button {
+  background: linear-gradient(135deg, #14b8a6, #0f766e);
+}
+
+.solution-button {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+}
+
+@media (max-width: 760px) {
+  .timer-actions {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 420px) {
+  .timer-actions {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
