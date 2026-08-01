@@ -5,4 +5,4 @@
 - **Don't hesistate to share your scores with your freinds**
 ### What's Coming Up ?
 - A Functionable Hint Button.
-- And an intelligent Game Solver(The Fule Solution Option).
+- And an intelligent Game Solver(The Full Solution Option).
