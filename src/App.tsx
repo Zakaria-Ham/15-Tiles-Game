@@ -8,18 +8,41 @@ type Square = {
   bgcolor: string;
 };
 
-const createDeck = (): Square[] => {
-  const cards: Square[] = Array.from({ length: 16 }, (_, index) => {
-    const number = index + 1;
-    return {
-      number: number === 16 ? "" : String(number),
-      bgcolor: number === 16 ? "transparent" : "#4f46e5",
-    };
-  });
+const createSolvedBoard = (): Square[] =>
+  Array.from({ length: 16 }, (_, index) => ({
+    number: index === 15 ? "" : String(index + 1),
+    bgcolor: index === 15 ? "transparent" : "#4f46e5",
+  }));
 
-  for (let i = cards.length - 1; i > 0; i--) {
-    const randomIndex = Math.floor(Math.random() * (i + 1));
-    [cards[i], cards[randomIndex]] = [cards[randomIndex], cards[i]];
+const getAdjacentIndices = (index: number) => {
+  const row = Math.floor(index / 4);
+  const col = index % 4;
+  const neighbors: number[] = [];
+
+  if (row > 0) neighbors.push(index - 4);
+  if (row < 3) neighbors.push(index + 4);
+  if (col > 0) neighbors.push(index - 1);
+  if (col < 3) neighbors.push(index + 1);
+
+  return neighbors;
+};
+
+const createDeck = (): Square[] => {
+  const cards = createSolvedBoard();
+  let emptyIndex = 15;
+  let lastMoved = -1;
+
+  const SHUFFLE_MOVES = 200;
+
+  for (let i = 0; i < SHUFFLE_MOVES; i++) {
+    const neighbors = getAdjacentIndices(emptyIndex).filter(
+      (n) => n !== lastMoved
+    );
+    const next = neighbors[Math.floor(Math.random() * neighbors.length)];
+
+    [cards[emptyIndex], cards[next]] = [cards[next], cards[emptyIndex]];
+    lastMoved = emptyIndex;
+    emptyIndex = next;
   }
 
   return cards;
@@ -175,7 +198,13 @@ function App() {
         </div>
       </div>
 
-      {hasWon && <GameWon onNewGame={startNewGame} onRestart={restartSameGame} />}
+      {hasWon && (
+        <GameWon
+          onNewGame={startNewGame}
+          onRestart={restartSameGame}
+          scoreSeconds={timerSeconds}
+        />
+      )}
     </div>
   );
 }

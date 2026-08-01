@@ -18,7 +18,9 @@
   box-sizing: border-box;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   margin: 0;
   min-height: 100%;
   height: 100%;
@@ -27,8 +29,12 @@ html, body, #root {
   color: var(--text);
 }
 
+html {
+  font-size: 100%;
+}
+
 body {
-  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 button {
@@ -36,42 +42,42 @@ button {
 }
 
 .App {
-  min-height: 100vh;
+  min-height: 100dvh;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
+  padding: clamp(0.75rem, 2vw, 1.5rem);
   position: relative;
 }
 
 .game-shell {
-  width: fit-content;
-  max-width: min(1280px, 100%);
+  width: min(100%, clamp(46rem, 72vw, 78rem));
   display: grid;
-  grid-template-columns: minmax(300px, 360px) minmax(0, 560px);
-  gap: 28px;
+  grid-template-columns: minmax(0, clamp(18rem, 24vw, 22rem)) minmax(0, 1fr);
+  gap: clamp(0.6rem, 1vw, 0.9rem);
   background: rgba(15, 23, 42, 0.75);
   border: 1px solid rgba(148, 163, 184, 0.18);
-  border-radius: 28px;
-  padding: 28px;
+  border-radius: clamp(1.25rem, 2vw, 1.75rem);
+  padding: clamp(1rem, 2.2vw, 1.75rem);
   box-shadow: 0 24px 70px var(--shadow);
   backdrop-filter: blur(10px);
+  container-type: inline-size;
 }
 
 .left-column {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  min-height: 100%;
-  width: 100%;
+  gap: clamp(0.8rem, 1.8vw, 1.25rem);
+  width: min(100%, clamp(17rem, 22vw, 22rem));
+  height: 100%;
 }
 
 .info-box {
   background: linear-gradient(180deg, var(--panel-card), rgba(15, 23, 42, 0.9));
   border: 1px solid rgba(148, 163, 184, 0.12);
-  border-radius: 20px;
-  padding: 22px 18px;
+  border-radius: 1.25rem;
+  padding: clamp(1rem, 2vw, 1.4rem);
   min-height: 0;
   width: 100%;
 }
@@ -79,14 +85,16 @@ button {
 .rules-box {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center; /* was space-between — that's what pushed content apart and left the dead middle gap */
+  gap: clamp(1.5rem, 3vw, 2.25rem); /* new — controlled space between title and list, replacing the auto-stretched gap */
   flex: 1;
-  min-height: 220px;
+  min-height: clamp(13rem, 32vw, 17rem);
+  padding: clamp(1.5rem, 3vw, 2rem); /* was inherited from .info-box's smaller padding — bumped up so the box reads as fuller */
 }
 
 .game-rules-title {
-  margin: 0 0 14px;
-  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  margin: 0;
+  font-size: clamp(1.8rem, 3.4vw, 2.75rem); /* was clamp(1.6rem, 3vw, 2.5rem) — slightly larger to fill more of the box */
   font-weight: 800;
   text-align: center;
   color: #f8fafc;
@@ -96,13 +104,13 @@ button {
   margin: 0;
   padding-left: 1.2rem;
   display: grid;
-  gap: 10px;
+  gap: 1.1rem; /* was 0.625rem — more breathing room between list items so the list itself takes up more space */
   color: var(--muted);
 }
 
 .rules-box li {
-  font-size: clamp(0.98rem, 1.8vw, 1.15rem);
-  line-height: 1.4;
+  font-size: clamp(1.05rem, 2vw, 1.25rem); /* was clamp(0.95rem, 1.8vw, 1.1rem) — larger text to fill the box */
+  line-height: 1.55; /* was 1.4 — taller lines add to the fill */
 }
 
 .board-panel {
@@ -110,33 +118,32 @@ button {
   align-items: stretch;
   justify-content: center;
   width: 100%;
-  max-width: 560px;
-  min-height: 100%;
+  min-width: 0;
 }
 
 .game-box {
   display: grid;
-  grid-template-columns: repeat(4, minmax(64px, 1fr));
-  gap: 12px;
-  width: 100%;
-  aspect-ratio: 1;
-  min-height: 560px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.45rem, 1.3vw, 0.75rem);
+  width: 90%;
   background: linear-gradient(180deg, rgba(31, 41, 55, 0.96), rgba(15, 23, 42, 0.96));
   border: 1px solid rgba(148, 163, 184, 0.12);
-  border-radius: 24px;
-  padding: 16px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+  border-radius: 1.5rem;
+  padding: clamp(0.7rem, 1.5vw, 1rem);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .game-square {
-  border-radius: 16px;
+  border-radius: clamp(0.75rem, 1.3vw, 1rem);
   background-color: var(--tile);
   color: white;
-  font-size: clamp(1.5rem, 3vw, 2.3rem);
+  font-size: clamp(1.35rem, 3vw, 2.35rem);
   font-weight: 800;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  aspect-ratio: 1;
   user-select: none;
   box-shadow: 0 10px 18px rgba(79, 70, 229, 0.25);
   transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
@@ -160,82 +167,144 @@ button {
 .gamewon-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(15, 23, 42, 0.7);
-  backdrop-filter: blur(4px);
+  background: rgba(2, 6, 23, 0.68);
+  backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
+  padding: clamp(1rem, 4vw, 1.5rem);
+}
+
+.gamewon-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  gap: 0.625rem;
 }
 
 .gamewon-box {
-  width: min(420px, 100%);
-  background: linear-gradient(180deg, #f8fafc, #dfe7ff);
-  color: #0f172a;
-  border-radius: 24px;
-  padding: 28px 24px;
-  box-shadow: 0 22px 60px rgba(15, 23, 42, 0.32);
+  width: min(92vw, 25rem);
+  background: linear-gradient(180deg, rgba(18, 35, 52, 0.95), rgba(15, 23, 42, 0.96));
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 1.75rem;
+  padding: clamp(1.5rem, 3vw, 2rem);
+  box-shadow: 0 30px 60px rgba(15, 23, 42, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   text-align: center;
+  backdrop-filter: blur(12px);
+}
+
+.gamewon-badge {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.18), rgba(34, 197, 94, 0.18));
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+  font-size: 1.2rem;
+}
+
+.gamewon-kicker {
+  display: inline-block;
+  margin-bottom: 0.3rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  color: #ddd6fe;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .gamewon-box h2 {
-  margin: 0 0 12px;
+  margin: 0 0 0.75rem;
   font-size: clamp(2rem, 5vw, 2.8rem);
-  color: #111827;
+  line-height: 1.1;
+  color: #f8fafc;
 }
 
 .gamewon-box p {
-  margin: 0 0 20px;
-  color: #334155;
+  margin: 0 0 1.5rem;
+  color: #cbd5e1;
   font-size: 1.05rem;
+  line-height: 1.55;
 }
 
 .gamewon-actions {
   display: flex;
-  gap: 12px;
+  gap: 0.75rem;
   justify-content: center;
   flex-wrap: wrap;
 }
 
 .gamewon-actions button {
-  min-width: 150px;
+  min-width: 9.375rem;
+  min-height: 2.9rem;
+  border: none;
+  border-radius: 0.9rem;
   color: #fff;
+  font-weight: 700;
+  font-size: 0.98rem;
+  cursor: pointer;
+  box-shadow: 0 12px 24px rgba(79, 70, 229, 0.18);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+
+.gamewon-actions button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
 }
 
 .gamewon-actions .primary {
   background: linear-gradient(135deg, var(--accent), #7c3aed);
+  box-shadow: 0 14px 28px rgba(139, 92, 246, 0.28);
+  width: 48%;
 }
 
 .gamewon-actions .secondary {
   background: linear-gradient(135deg, var(--accent-2), #16a34a);
+  box-shadow: 0 14px 28px rgba(34, 197, 94, 0.25);
+  width: 48%;
 }
 
-@media (max-width: 760px) {
-  .App {
-    padding: 16px;
-  }
+.share-button {
+  background: linear-gradient(135deg, var(--accent-3), #ea580c);
+  box-shadow: 0 14px 28px rgba(245, 158, 11, 0.25);
+  width: 100%;
+}
 
+.gamewon-status {
+  margin: 0.95rem 0 0;
+  color: #dbeafe;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 769px) {
   .game-shell {
     grid-template-columns: 1fr;
-    padding: 20px 16px;
-    gap: 20px;
+    width: min(100%, 32rem);
+  }
+
+  .left-column {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .board-panel {
+    width: 100%;
   }
 
   .game-box {
-    width: min(100%, 380px);
-    gap: 10px;
-    padding: 12px;
-  }
-}
-
-@media (max-width: 420px) {
-  .game-box {
-    gap: 8px;
-    padding: 10px;
-  }
-
-  .game-square {
-    border-radius: 12px;
+    width: min(100%, 28rem);
+    max-width: 28rem;
   }
 
   .gamewon-actions {
@@ -245,4 +314,15 @@ button {
   .gamewon-actions button {
     width: 100%;
   }
+  .gamewon-actions .primary {
+  width: 100%;
+}
+
+.gamewon-actions .secondary {
+  width: 100%;
+}
+
+.share-button {
+  width: 100%;
+}
 }
