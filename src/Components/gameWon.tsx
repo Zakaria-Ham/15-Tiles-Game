@@ -18,22 +18,46 @@ function GameWon({ onNewGame, onRestart, scoreSeconds }: GameWonProps) {
   const [shareStatus, setShareStatus] = useState("");
 
   const handleShare = async () => {
-    const shareText = `I solved the 15 Tiles Game in ${formatTime(scoreSeconds)}!`;
-    const shareUrl = window.location.href;
+    const shareText = `I solved the 15 Tiles Game in ${formatTime(scoreSeconds)}!
+      play it here: https://15-tiles-game.vercel.app`;
+    const shareData = {
+      title: "15 Tiles Game",
+      text: shareText,
+    };
 
     try {
-      if (navigator.share) {
-        await navigator.share({
-          title: "15 Tiles Game",
-          text: shareText,
-          url: shareUrl,
-        });
+      if (navigator.share && navigator.canShare?.(shareData)) {
+        await navigator.share(shareData);
         setShareStatus("Score shared successfully!");
         return;
       }
 
-      await navigator.clipboard.writeText(`${shareText} ${shareUrl}`);
-      setShareStatus("Score copied to clipboard!");
+      const copiedText = `${shareText}`;
+
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(copiedText);
+        setShareStatus("Score copied to clipboard!");
+        return;
+      }
+
+      const textArea = document.createElement("textarea");
+      textArea.value = copiedText;
+      textArea.setAttribute("readonly", "");
+      textArea.style.position = "fixed";
+      textArea.style.top = "-9999px";
+      textArea.style.left = "-9999px";
+      document.body.appendChild(textArea);
+      textArea.select();
+
+      const wasCopied = document.execCommand("copy");
+      document.body.removeChild(textArea);
+
+      if (wasCopied) {
+        setShareStatus("Score copied to clipboard!");
+        return;
+      }
+
+      setShareStatus("Sharing is unavailable on this device.");
     } catch (error) {
       if (error instanceof Error && error.name === "AbortError") {
         setShareStatus("Share canceled.");

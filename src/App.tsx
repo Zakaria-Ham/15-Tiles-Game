@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import Footer from "./Components/footer";
 import GameWon from "./Components/gameWon";
 import TimerBox from "./Components/TimerBox.tsx";
+import TopBar from "./Components/topBar";
 
 type Square = {
   number: string;
@@ -153,47 +155,50 @@ function App() {
 
   return (
     <div className="App">
-      <div className="game-shell">
-        <div className="left-column">
-          <TimerBox
-            timerSeconds={timerSeconds}
-            isPaused={isPaused}
-            onTogglePause={() => setIsPaused((value) => !value)}
-            onRestart={restartSameGame}
-            onNewGame={startNewGame}
-            onHint={() => undefined}
-            onFullSolution={() => undefined}
-          />
+      <TopBar />
+      <div className="app-frame">
+        <div className="game-shell">
+          <div className="left-column">
+            <TimerBox
+              timerSeconds={timerSeconds}
+              isPaused={isPaused}
+              onTogglePause={() => setIsPaused((value) => !value)}
+              onRestart={restartSameGame}
+              onNewGame={startNewGame}
+              onHint={() => undefined}
+              onFullSolution={() => undefined}
+            />
 
-          <aside className="info-box rules-box">
-            <p className="game-rules-title">The Rules</p>
-            <ul>
-              <li>Slide tiles into the empty space to rebuild the order.</li>
-              <li>Arrange the numbers from 1 to 15 with the blank tile last.</li>
-            </ul>
-          </aside>
-        </div>
+            <aside className="info-box rules-box">
+              <p className="game-rules-title">The Rules</p>
+              <ul>
+                <li>Slide tiles into the empty space to rebuild the order.</li>
+                <li>Arrange the numbers from 1 to 15 with the blank tile last.</li>
+              </ul>
+            </aside>
+          </div>
 
-        <div className="board-panel">
-          <div className="game-box">
-            {squares.map((square, index) => (
-              <button
-                type="button"
-                key={`${square.number}-${index}`}
-                className={`game-square${square.number === "" ? " empty" : ""}`}
-                style={{
-                  backgroundColor: square.number === "" ? "transparent" : square.bgcolor,
-                  border:
-                    square.number === ""
-                      ? "2px dashed rgba(148, 163, 184, 0.6)"
-                      : "2px solid rgba(255,255,255,0.1)",
-                }}
-                onClick={() => handleSquareClick(index)}
-                disabled={hasWon || isPaused}
-              >
-                {square.number || ""}
-              </button>
-            ))}
+          <div className="board-panel">
+            <div className="game-box">
+              {squares.map((square, index) => (
+                <button
+                  type="button"
+                  key={`${square.number}-${index}`}
+                  className={`game-square${square.number === "" ? " empty" : ""}`}
+                  style={{
+                    backgroundColor: square.number === "" ? "transparent" : square.bgcolor,
+                    border:
+                      square.number === ""
+                        ? "2px dashed rgba(148, 163, 184, 0.6)"
+                        : "2px solid rgba(255,255,255,0.1)",
+                  }}
+                  onClick={() => handleSquareClick(index)}
+                  disabled={hasWon || isPaused}
+                >
+                  {square.number || ""}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -205,6 +210,7 @@ function App() {
           scoreSeconds={timerSeconds}
         />
       )}
+      <Footer />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import "./TimerBox.css";
+import "./styles/TimerBox.css";
 
 type TimerBoxProps = {
   timerSeconds: number;

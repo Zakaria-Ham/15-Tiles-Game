@@ -1,0 +1,73 @@
+.top-bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  width: 100vw;
+  min-height: 4.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0.85rem 1.25rem;
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+  background: rgba(15, 23, 42, 0.88);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.22);
+  backdrop-filter: blur(10px);
+  box-sizing: border-box;
+}
+
+.brand-wrap {
+  position: absolute;
+  left: 1.25rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  flex-wrap: nowrap;
+}
+
+.brand-name {
+  font-size: clamp(1.1rem, 2vw, 1.8rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #f8fafc;
+  line-height: 1;
+}
+
+.brand-subtitle {
+  font-size: 0.7rem;
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  color: #cbd5e1;
+  line-height: 1;
+}
+
+.game-title {
+  margin: 0;
+  font-size: clamp(1rem, 1.8vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #dbeafe;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .top-bar {
+    justify-content: space-between;
+    padding: 0.9rem 1rem;
+  }
+
+  .brand-wrap {
+    position: static;
+  }
+
+  .game-title {
+    margin-left: auto;
+    text-align: right;
+    letter-spacing: 0.04em;
+  }
+}
