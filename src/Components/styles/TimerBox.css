@@ -2,7 +2,11 @@
   display: flex;
   flex-direction: column;
   gap: clamp(0.75rem, 2vw, 1.125rem);
-  background: linear-gradient(180deg, rgba(29, 77, 108, 0.75), rgba(15, 23, 42, 0.9));
+  background: linear-gradient(
+    180deg,
+    rgba(29, 77, 108, 0.75),
+    rgba(15, 23, 42, 0.9)
+  );
   flex: 1;
   justify-content: space-between;
   min-height: clamp(12rem, 28vw, 16.25rem);
@@ -36,8 +40,8 @@
 
 .timer-actions {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: clamp(0.45rem, 1vw, 0.7rem);
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: clamp(0.4rem, 1vw, 0.7rem);
   align-items: stretch;
 }
 
@@ -50,11 +54,23 @@
   font-size: clamp(1rem, 2vw, 1.25rem);
   font-weight: 700;
   cursor: pointer;
-  transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .icon-button:hover {
   transform: translateY(-1px);
+}
+
+.icon-button:active {
+  transform: translateY(0);
+}
+
+.icon-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .pause-button {
@@ -78,3 +94,6 @@
   background: linear-gradient(135deg, #3b82f6, #1d4ed8);
 }
 
+.clear-button {
+  background: linear-gradient(135deg, #64748b, #334155);
+}
