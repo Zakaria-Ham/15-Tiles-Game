@@ -53,12 +53,24 @@ The game includes a highly optimized solver built directly into the client-side 
 ## 📂 Project Structure
 
 ```text
-src/
-├── App.tsx               # Main game loop, board state, and layout assembly
-├── App.css               # Global game styling
-├── Components/
-│   ├── TimerBox.tsx      # Time management, controls, AND the IDA* Solver logic
-│   ├── GameWon.tsx       # Victory overlay and Web Share API logic
-│   ├── topBar.tsx        # Header and branding component
-│   └── footer.tsx        # Social links and footer information
-└── styles/               # Component-specific CSS files
+15-Tiles-Game/
+├── public/
+│   └── favicon.png          # Application favicon
+├── src/
+│   ├── Components/
+│   │   ├── styles/
+│   │   │   ├── footer.css   # Footer styling
+│   │   │   ├── TimerBox.css # Timer & control buttons styling
+│   │   │   └── topBar.css   # Header bar styling
+│   │   ├── footer.tsx       # Footer component with social media links
+│   │   ├── gameWon.tsx      # Victory overlay modal & Web Share API logic
+│   │   ├── TimerBox.tsx     # Timer, control panel & IDA* solver engine
+│   │   └── topBar.tsx       # Brand header component
+│   ├── App.css              # Main app layout & game board styling
+│   ├── App.tsx              # Main application, state management & tile sliding logic
+│   ├── index.css            # Global CSS reset & base styles
+│   └── main.tsx             # React application entry point
+├── index.html               # Main HTML document template
+├── package.json             # Project dependencies and npm scripts
+├── README.md                # Project documentation
+└── vite.config.ts           # Vite build configuration
