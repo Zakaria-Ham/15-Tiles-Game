@@ -1,8 +1,13 @@
+<div align="center">
+ 
+<img src="./public/favicon.png" width="230" alt="15 Tiles Game logo" />
+ 
 # 🧩 15 Tiles Game
 
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+</div>
 
 A modern, highly interactive implementation of the classic 15-puzzle sliding game built with **React** and **TypeScript**. 
 
