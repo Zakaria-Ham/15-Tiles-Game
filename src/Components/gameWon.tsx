@@ -4,6 +4,7 @@ type GameWonProps = {
   onNewGame: () => void;
   onRestart: () => void;
   scoreSeconds: number;
+  moveCounts: number;
 };
 
 const formatTime = (totalSeconds: number) => {
@@ -14,7 +15,7 @@ const formatTime = (totalSeconds: number) => {
   return `${minutes}:${seconds}`;
 };
 
-function GameWon({ onNewGame, onRestart, scoreSeconds }: GameWonProps) {
+function GameWon({ onNewGame, onRestart, scoreSeconds, moveCounts }: GameWonProps) {
   const [shareStatus, setShareStatus] = useState("");
 
   const handleShare = async () => {
@@ -80,7 +81,8 @@ function GameWon({ onNewGame, onRestart, scoreSeconds }: GameWonProps) {
 
         <h2>You won!</h2>
         <p>
-          Final score: <strong>{formatTime(scoreSeconds)}</strong>
+          Final score: <strong>{formatTime(scoreSeconds)}</strong> <br />
+          Done in: <strong>{moveCounts}</strong>
         </p>
 
         <div className="gamewon-actions">

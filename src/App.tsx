@@ -117,6 +117,8 @@ function App() {
 
   const [solutionStep, setSolutionStep] = useState(0);
 
+  const [moveNumber, setMoveNumber] = useState(0);
+
   useEffect(() => {
     if (hasWon || !hasStarted || isPaused) {
       return;
@@ -217,7 +219,7 @@ function App() {
     }
 
     const emptyIndex = squares.findIndex((square) => square.number === "");
-
+    setMoveNumber((prev) => prev + 1);
     if (emptyIndex === -1 || !isAdjacentToEmpty(index, emptyIndex)) {
       return;
     }
@@ -327,6 +329,7 @@ function App() {
           onNewGame={startNewGame}
           onRestart={restartSameGame}
           scoreSeconds={timerSeconds}
+          moveCounts={moveNumber}
         />
       )}
 
